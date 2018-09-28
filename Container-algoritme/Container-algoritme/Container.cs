@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace Container_algoritme
 {
-    class Container
+    public class Container
     {
+        private int weight { get; set; }
+
+        public int Weight {
+            get
+            {
+                return this.weight;
+            }
+        }
+
+        public Container(int weight)
+        {
+            this.weight = weight;
+        }
     }
 }
