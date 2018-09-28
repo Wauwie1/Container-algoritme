@@ -8,20 +8,18 @@ namespace Container_algoritme
 {
     public class Container
     {
-        private int weight { get; set; }
+        public int weight { get; private set; }
+        private Types.ContainerType type { get;}
 
-        public int Weight {
-            get
-            {
-                return this.weight;
-            }
-        }
+
 
         //Constructor
-        public Container(int weight)
+        public Container(int weight, Types.ContainerType type)
         {
             //Initializes fields
             this.weight = weight;
+            this.type = type;
         }
+
     }
 }

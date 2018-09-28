@@ -40,7 +40,7 @@ namespace Container_algoritme.Tests
 
         private bool IsTooHeavy(Container container)
         {
-            if (stackedWeightBottom + container.Weight > 120)
+            if (stackedWeightBottom + container.weight > 120)
             {
                 return true;
             }

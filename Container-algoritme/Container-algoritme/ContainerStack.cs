@@ -36,7 +36,7 @@ namespace Container_algoritme
         private bool IsTooHeavy(Container container)
         {
             //Checks if the added weight exceeds the total weight of 120
-            if(stackedWeightBottom + container.Weight > 120)
+            if(stackedWeightBottom + container.weight > 120)
             {
                 return true;
             }
