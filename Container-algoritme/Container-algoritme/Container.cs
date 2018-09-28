@@ -17,8 +17,10 @@ namespace Container_algoritme
             }
         }
 
+        //Constructor
         public Container(int weight)
         {
+            //Initializes fields
             this.weight = weight;
         }
     }
