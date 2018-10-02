@@ -79,15 +79,18 @@ namespace Container_algoritme
         {
             try
             {
-                int shipLength = Convert.ToInt32(Textbox_Ship_Length.Text);
-                int shipWidth = Convert.ToInt32(Textbox_Ship_Width.Text);
+                decimal shipLength = Convert.ToInt32(Textbox_Ship_Length.Text);
+                decimal shipWidth = Convert.ToInt32(Textbox_Ship_Width.Text);
                 int shipMaxWeight = Convert.ToInt32(Textbox_Ship_MaxWeight.Text);
 
-                int containerLength = Convert.ToInt32(Textbox_Container_Length.Text);
-                int containerWidth = Convert.ToInt32(Textbox_Container_Width.Text);
+                decimal containerLength = Convert.ToInt32(Textbox_Container_Length.Text);
+                decimal containerWidth = Convert.ToInt32(Textbox_Container_Width.Text);
 
                 if(IsDifferenceCorrect(shipLength, shipWidth, containerLength, containerWidth)){
+                    decimal rows = Math.Ceiling(shipLength / containerLength);
+                    decimal columns = Math.Ceiling(shipWidth / containerWidth);
 
+                    Ship ship = new Ship(rows, columns, shipMaxWeight);
                 }
               
             }
@@ -97,7 +100,7 @@ namespace Container_algoritme
             }
         }
 
-        private bool IsDifferenceCorrect(int shipLength, int shipWidth, int containerLength, int containerWidth)
+        private bool IsDifferenceCorrect(decimal shipLength, decimal shipWidth, decimal containerLength, decimal containerWidth)
         {
             if(shipLength - containerLength > 0 && shipWidth - containerWidth > 0)
             {
@@ -107,6 +110,8 @@ namespace Container_algoritme
                 throw new Exception();
             }
         }
+
+
 
     }
 

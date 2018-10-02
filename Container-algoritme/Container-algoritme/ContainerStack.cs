@@ -29,7 +29,7 @@ namespace Container_algoritme
             }
             else
             {
-                return false;
+                throw new Exception("Weightlimit exceeded");
             }
         }
 
