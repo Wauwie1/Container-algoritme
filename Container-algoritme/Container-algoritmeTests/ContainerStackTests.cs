@@ -19,7 +19,7 @@ namespace Container_algoritme.Tests
         {
             stackedContainers = new List<Container>();
             stackedWeightBottom = 0;
-            Container container = new Container(120);
+            Container container = new Container(120, Types.ContainerType.regular);
             bool test = StackContainer(container);
 
             Assert.AreEqual(true, test);

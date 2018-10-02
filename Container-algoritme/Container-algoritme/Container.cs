@@ -21,5 +21,11 @@ namespace Container_algoritme
             this.type = type;
         }
 
+        public override string ToString()
+        {
+
+            return string.Format("{0} {1} ton container.", Convert.ToString(type), weight);
+        }
+
     }
 }

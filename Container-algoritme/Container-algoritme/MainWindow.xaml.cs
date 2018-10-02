@@ -20,9 +20,94 @@ namespace Container_algoritme
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Container> containers;
         public MainWindow()
         {
             InitializeComponent();
+            containers = new List<Container>();
+            FillComboBox();
         }
+
+        private void Button_Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddContainer();
+        }
+
+        private void ComboBox_Type_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddContainer()
+        {
+            try
+            {
+                int weight = Convert.ToInt32(TextBox_weight.Text);
+                var type = ComboBox_Type.SelectedItem;
+
+                if(weight >= 4 && weight <= 120 && type != null)
+                {
+                    Container container = new Container(weight, (Types.ContainerType)type);
+                    containers.Add(container);
+                    Listbox_containers.Items.Add(container);
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Not all fields were filled out correctly.");
+            }
+        }
+
+        private void FillComboBox()
+        {
+            ComboBox_Type.Items.Add(Types.ContainerType.regular);
+            ComboBox_Type.Items.Add(Types.ContainerType.cooled);
+            ComboBox_Type.Items.Add(Types.ContainerType.precious);
+        }
+
+        private void Button_CreateShip_Click(object sender, RoutedEventArgs e)
+        {
+            CreateShip();
+        }
+
+        private void CreateShip()
+        {
+            try
+            {
+                int shipLength = Convert.ToInt32(Textbox_Ship_Length.Text);
+                int shipWidth = Convert.ToInt32(Textbox_Ship_Width.Text);
+                int shipMaxWeight = Convert.ToInt32(Textbox_Ship_MaxWeight.Text);
+
+                int containerLength = Convert.ToInt32(Textbox_Container_Length.Text);
+                int containerWidth = Convert.ToInt32(Textbox_Container_Width.Text);
+
+                if(IsDifferenceCorrect(shipLength, shipWidth, containerLength, containerWidth)){
+
+                }
+              
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Not all fields were filled out correctly.");
+            }
+        }
+
+        private bool IsDifferenceCorrect(int shipLength, int shipWidth, int containerLength, int containerWidth)
+        {
+            if(shipLength - containerLength > 0 && shipWidth - containerWidth > 0)
+            {
+                return true;
+            }else
+            {
+                throw new Exception();
+            }
+        }
+
     }
+
 }

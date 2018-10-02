@@ -7,6 +7,60 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition />
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBox x:Name="TextBox_weight" Text="Enter weight" Grid.Row="0" />
+            <ComboBox x:Name="ComboBox_Type" Grid.Row="1"/>
+            <Button x:Name="Button_Add" Content="Add" Grid.Row="2" Click="Button_Add_Click" />
+            <ListBox x:Name="Listbox_containers" Grid.Row="3" />
+            
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                    <Label Content="Ship length:" />
+                    <Label Content="Ship width:" />
+                    <Label Content="Max weight:" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                    <TextBox x:Name="Textbox_Ship_Length" Width="75" Text="In cm" />
+                    <TextBox x:Name="Textbox_Ship_Width" Width="75" Text="In cm"/>
+                    <TextBox x:Name="Textbox_Ship_MaxWeight" Width="75" Text="In ton"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1">
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+                    <Label Content="Container length:" />
+                    <Label Content="Container width:" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+                    <TextBox x:Name="Textbox_Container_Length" Width="100" Text="In cm" />
+                    <TextBox x:Name="Textbox_Container_Width" Width="100" Text="In cm"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Button x:Name="Button_CreateShip" Content="Create ship" Grid.Row="3" Grid.Column="1" Height="40" Width="80" Click="Button_CreateShip_Click"/>
+        </Grid>
     </Grid>
 </Window>
