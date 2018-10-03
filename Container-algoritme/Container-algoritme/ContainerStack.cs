@@ -12,17 +12,19 @@ namespace Container_algoritme
         private int stackedWeightBottom { get; set; }
 
         //Constructor
-        public ContainerStack()
+        public ContainerStack(Container InitialContainer)
         {
             //Initializes fields
             stackedContainers = new List<Container>();
+            //Add initialcontainer
+            stackedContainers.Add(InitialContainer);
             stackedWeightBottom = 0;
         }
 
         public bool StackContainer(Container container)
         {
             //Checks if a container can be stacked without exceeding the weight limit
-            if (!IsTooHeavy(container))
+            if (!IsTooHeavy(container) && !IsTopPrecious())
             {
                 stackedContainers.Add(container);
                 return true;
@@ -41,6 +43,19 @@ namespace Container_algoritme
                 return true;
             }
             else
+            {
+                return false;
+            }
+        }
+
+        private bool IsTopPrecious()
+        {
+            int lastContainer = stackedContainers.Count;
+
+            if(stackedContainers[lastContainer].type == Types.ContainerType.precious)
+            {
+                return true;
+            }else
             {
                 return false;
             }

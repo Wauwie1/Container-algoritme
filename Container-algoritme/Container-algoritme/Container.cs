@@ -9,7 +9,7 @@ namespace Container_algoritme
     public class Container
     {
         public int weight { get; private set; }
-        private Types.ContainerType type { get;}
+        public Types.ContainerType type { get; private set; }
 
 
 
