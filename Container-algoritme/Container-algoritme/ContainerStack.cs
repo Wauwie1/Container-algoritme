@@ -21,17 +21,17 @@ namespace Container_algoritme
             stackedWeightBottom = 0;
         }
 
-        public bool StackContainer(Container container)
+        public void StackContainer(Container container)
         {
             //Checks if a container can be stacked without exceeding the weight limit
             if (!IsTooHeavy(container) && !IsTopPrecious())
             {
                 stackedContainers.Add(container);
-                return true;
+                
             }
             else
             {
-                throw new Exception("Weightlimit exceeded");
+                throw new Exception("Weightlimit exceeded or precious");
             }
         }
 
@@ -48,7 +48,7 @@ namespace Container_algoritme
             }
         }
 
-        private bool IsTopPrecious()
+        public bool IsTopPrecious()
         {
             int lastContainer = stackedContainers.Count;
 

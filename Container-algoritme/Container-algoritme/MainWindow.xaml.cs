@@ -86,7 +86,8 @@ namespace Container_algoritme
                 decimal containerLength = Convert.ToInt32(Textbox_Container_Length.Text);
                 decimal containerWidth = Convert.ToInt32(Textbox_Container_Width.Text);
 
-                if(IsDifferenceCorrect(shipLength, shipWidth, containerLength, containerWidth)){
+                if(IsDifferenceCorrect(shipLength, shipWidth, containerLength, containerWidth))
+                {
                     decimal rows = Math.Ceiling(shipLength / containerLength);
                     decimal columns = Math.Ceiling(shipWidth / containerWidth);
 

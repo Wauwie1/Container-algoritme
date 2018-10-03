@@ -49,5 +49,61 @@ namespace Container_algoritme.Tests
                 return false;
             }
         }
+
+        [TestMethod()]
+        public void IsTopPreciousTest1()
+        {
+            stackedContainers = new List<Container>();
+            
+            bool test = false;
+
+            Container cont1 = new Container(90, Types.ContainerType.regular);
+            Container cont2 = new Container(90, Types.ContainerType.regular);
+            Container cont3 = new Container(90, Types.ContainerType.precious);
+
+            stackedContainers.Add(cont1);
+            stackedContainers.Add(cont2);
+            stackedContainers.Add(cont3);
+            int lastContainer = stackedContainers.Count - 1;
+
+
+            if (stackedContainers[lastContainer].type == Types.ContainerType.precious)
+            {
+                test = true;
+            }
+            else
+            {
+                test = false;
+            }
+            Assert.AreEqual(true, test);
+        }
+
+        [TestMethod()]
+        public void IsTopPreciousTest2()
+        {
+            stackedContainers = new List<Container>();
+
+            bool test = false;
+
+            Container cont1 = new Container(90, Types.ContainerType.regular);
+            Container cont2 = new Container(90, Types.ContainerType.regular);
+            Container cont3 = new Container(90, Types.ContainerType.cooled);
+
+            stackedContainers.Add(cont1);
+            stackedContainers.Add(cont2);
+            stackedContainers.Add(cont3);
+            int lastContainer = stackedContainers.Count - 1;
+
+
+            if (stackedContainers[lastContainer].type == Types.ContainerType.precious)
+            {
+                test = true;
+            }
+            else
+            {
+                test = false;
+            }
+            Assert.AreEqual(false, test);
+        }
     }
 }
