@@ -29,22 +29,33 @@ namespace Container_algoritme
 
         public void CreateStacks()
         {
-            CreateCooledStacks();
+            //Creates stacks for each type
+            CreateStacksOfType(Types.ContainerType.cooled);
+            CreateStacksOfType(Types.ContainerType.regular);
+
+
+            //Debug
+            LogContainers();
+            
         }
 
-        private void CreateCooledStacks()
+        private void CreateStacksOfType(Types.ContainerType containerType)
         {
-            List<Container> cooledContainers = toBeStackedContainers.FindAll(c => c.type == Types.ContainerType.cooled);
+            //Gets all the containers of a specific type
+            List<Container> ContainersOfType = toBeStackedContainers.FindAll(c => c.type == containerType);
 
-            foreach (var container in cooledContainers)
+            //Cycles through each container...
+            foreach (var container in ContainersOfType)
             {
                 bool containerIsAdded = false;
+                //...and tries to place it in a stack...
                 for (int i = 0; i < containerStacks.Count && !containerIsAdded; i++)
                 {
                     if (containerStacks[i].StackContainer(container))
                     {
                         containerIsAdded = true;
                     }
+                    //If it can't be placed onto any stack, create a new stack
                     else if (i == containerStacks.Count - 1)
                     {
                         ContainerStack newStack = new ContainerStack(container);
@@ -59,7 +70,23 @@ namespace Container_algoritme
 
         private void OrderContainersByWeight()
         {
+            //Uses linq to sort by weight
             toBeStackedContainers = toBeStackedContainers.OrderByDescending(c => c.weight).ToList();
+        }
+
+        private void LogContainers()
+        {
+            //Outputs every stack and its containers to the console
+            int stack = 0;
+            foreach (ContainerStack cs in containerStacks)
+            {
+                Console.WriteLine(stack);
+                stack++;
+                foreach (Container c in cs.stackedContainers)
+                {
+                    Console.WriteLine(string.Format("-----{0} container, {1} tons.", c.type, c.weight));
+                }
+            }
         }
     }
 }

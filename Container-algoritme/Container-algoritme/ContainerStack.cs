@@ -8,7 +8,9 @@ namespace Container_algoritme
 {
     public class ContainerStack
     {
-        private List<Container> stackedContainers { get; set; }
+
+        //TODO: Make private
+        public List<Container> stackedContainers { get; set; }
         private int stackedWeightBottom { get; set; }
         private int totalWeight { get; set; }
 
