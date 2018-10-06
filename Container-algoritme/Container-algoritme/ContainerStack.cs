@@ -10,6 +10,7 @@ namespace Container_algoritme
     {
         private List<Container> stackedContainers { get; set; }
         private int stackedWeightBottom { get; set; }
+        private int totalWeight { get; set; }
 
         //Constructor
         public ContainerStack(Container InitialContainer)
@@ -19,18 +20,21 @@ namespace Container_algoritme
             //Add initialcontainer
             stackedContainers.Add(InitialContainer);
             stackedWeightBottom = 0;
+            totalWeight = 0;
         }
 
-        public void StackContainer(Container container)
+        public bool StackContainer(Container container)
         {
             //Checks if a container can be stacked without exceeding the weight limit
-            if (!IsTooHeavy(container) && !IsTopPrecious())
+            if (!IsTooHeavy(container))
             {
                 stackedContainers.Add(container);
-                
+                stackedWeightBottom += container.weight;
+                return true;
             }
             else
             {
+                return false;
                 throw new Exception("Weightlimit exceeded or precious");
             }
         }
@@ -38,7 +42,10 @@ namespace Container_algoritme
         private bool IsTooHeavy(Container container)
         {
             //Checks if the added weight exceeds the total weight of 120
-            if(stackedWeightBottom + container.weight > 120)
+            int bottomAndNewWeight = stackedWeightBottom + container.weight;
+
+
+            if (bottomAndNewWeight > 120)
             {
                 return true;
             }
@@ -60,5 +67,14 @@ namespace Container_algoritme
                 return false;
             }
         }
+
+        private void CalculateTotalWeight()
+        {
+            foreach(Container c in stackedContainers)
+            {
+                totalWeight += c.weight;
+            }
+        }
+        
     }
 }

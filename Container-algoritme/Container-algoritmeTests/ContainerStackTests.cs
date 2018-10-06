@@ -13,12 +13,14 @@ namespace Container_algoritme.Tests
     {
         private List<Container> stackedContainers { get; set; }
         private int stackedWeightBottom { get; set; }
+        private int totalWeight { get; set; }
 
         [TestMethod()]
         public void StackContainerTest()
         {
             stackedContainers = new List<Container>();
             stackedWeightBottom = 0;
+            totalWeight = 0;
             Container container = new Container(120, Types.ContainerType.regular);
             bool test = StackContainer(container);
 
