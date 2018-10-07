@@ -32,7 +32,7 @@ namespace Container_algoritme
             //Creates stacks for each type
             CreateStacksOfType(Types.ContainerType.cooled);
             CreateStacksOfType(Types.ContainerType.regular);
-
+            CreateStacksOfType(Types.ContainerType.precious);
 
             //Debug
             LogContainers();
@@ -44,7 +44,6 @@ namespace Container_algoritme
             //Gets all the containers of a specific type
             List<Container> ContainersOfType = toBeStackedContainers.FindAll(c => c.type == containerType);
 
-            //Cycles through each container...
             foreach (var container in ContainersOfType)
             {
                 bool containerIsAdded = false;
@@ -60,12 +59,12 @@ namespace Container_algoritme
                     {
                         ContainerStack newStack = new ContainerStack(container);
                         containerStacks.Add(newStack);
-                        containerStacks[i + 1].StackContainer(container);
                         containerIsAdded = true;
                     }
 
                 }
             }
+
         }
 
         private void OrderContainersByWeight()
