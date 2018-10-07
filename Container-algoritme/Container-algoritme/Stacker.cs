@@ -82,6 +82,7 @@ namespace Container_algoritme
             foreach (ContainerStack cs in containerStacks)
             {
                 Console.WriteLine(stack);
+                Console.WriteLine(string.Format("Contains cooled: {0}. Contains precious: {1}.", cs.IsCooled, cs.IsPrecious));
                 stack++;
                 foreach (Container c in cs.stackedContainers)
                 {

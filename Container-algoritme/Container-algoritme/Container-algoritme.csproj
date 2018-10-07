@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ColumnCreator.cs" />
+    <Compile Include="ContainerColumn.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="ShipYard.cs" />
     <Compile Include="Stacker.cs" />

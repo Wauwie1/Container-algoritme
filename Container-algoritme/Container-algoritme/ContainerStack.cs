@@ -14,13 +14,19 @@ namespace Container_algoritme
         private int stackedWeightBottom { get; set; }
         private int totalWeight { get; set; }
 
+        public bool IsPrecious { get; private set; }
+        public bool IsCooled { get; private set; }
+
         //Constructor
         public ContainerStack(Container InitialContainer)
         {
             //Initializes fields
             stackedContainers = new List<Container>();
+            IsPrecious = false;
+            IsCooled = false;
             //Add initialcontainer
             stackedContainers.Add(InitialContainer);
+            SetStackTypes(InitialContainer);
             stackedWeightBottom = 0;
             totalWeight = 0;
         }
@@ -32,6 +38,9 @@ namespace Container_algoritme
             {
                 stackedContainers.Add(container);
                 stackedWeightBottom += container.weight;
+
+                SetStackTypes(container);
+
                 return true;
             }
             else
@@ -75,6 +84,18 @@ namespace Container_algoritme
             foreach(Container c in stackedContainers)
             {
                 totalWeight += c.weight;
+            }
+        }
+
+        private void SetStackTypes(Container container)
+        {
+            if (container.type == Types.ContainerType.cooled)
+            {
+                IsCooled = true;
+            }
+            if (container.type == Types.ContainerType.precious)
+            {
+                IsPrecious = true;
             }
         }
         

@@ -9,6 +9,7 @@ namespace Container_algoritme
     class ShipYard
     {
         private List<ContainerStack> containerStacks;
+        private List<ContainerColumn> containerColumns;
         private Stacker stacker;
 
         public ShipYard()
@@ -23,6 +24,10 @@ namespace Container_algoritme
             containerStacks = stacker.StackContainers(toBeStacked);
         }
 
+        public void CreateColumns(List<Container> toBeStacked)
+        {
+           // containerColumns;
+        }
 
     }
 }
