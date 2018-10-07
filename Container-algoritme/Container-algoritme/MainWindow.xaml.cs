@@ -92,8 +92,8 @@ namespace Container_algoritme
                     decimal columns = Math.Ceiling(shipWidth / containerWidth);
 
                     Ship ship = new Ship(rows, columns, shipMaxWeight);
-                    ShipYard shipYard = new ShipYard(containers);
-                    shipYard.CreateStacks();
+                    ShipYard shipYard = new ShipYard();
+                    shipYard.CreateStacks(containers);
                 }
               
             }

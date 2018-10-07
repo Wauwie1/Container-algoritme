@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Ship.cs" />
     <Compile Include="ShipYard.cs" />
+    <Compile Include="Stacker.cs" />
     <Compile Include="Types.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
