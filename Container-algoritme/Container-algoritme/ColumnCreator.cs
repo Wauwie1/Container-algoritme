@@ -9,15 +9,15 @@ namespace Container_algoritme
     class ColumnCreator
     {
         private int maxRows;
-        private List<ContainerStack> containerStacks;
         private List<ContainerColumn> containerColumns;
-        public ColumnCreator(int maxRows, List<ContainerStack> containerStacks)
+        public ColumnCreator(int maxRows)
         {
+            containerColumns = new List<ContainerColumn>();
             this.maxRows = maxRows;
-            this.containerStacks = containerStacks;
+            
         }
 
-        public void CreateColumns()
+        public List<ContainerColumn> CreateColumns(List<ContainerStack> containerStacks)
         {
             List<ContainerStack> cooledStacks = containerStacks.FindAll(cs => cs.IsCooled == true).ToList();
 
@@ -25,6 +25,30 @@ namespace Container_algoritme
             {
                 ContainerColumn cooledColumn = new ContainerColumn();
                 cooledColumn.AddStack(cs);
+                containerColumns.Add(cooledColumn);
+            }
+
+            LogColumns();
+            return containerColumns;
+        }
+
+        private void LogColumns()
+        {
+            int column = 0;
+            foreach(var cc in containerColumns)
+            {
+                int stack = 0;
+                Console.WriteLine(string.Format("COLUMN: {0}", column));
+                column++;
+                foreach(var cs in cc.containerStacks)
+                {
+                    Console.WriteLine(string.Format("STACK: {0}", stack));
+                    stack++;
+                    foreach(var container in cs.stackedContainers)
+                    {
+                        Console.WriteLine(string.Format("--- {0}", container.ToString()));
+                    }
+                }
             }
         }
     }

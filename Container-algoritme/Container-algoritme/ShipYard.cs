@@ -11,11 +11,13 @@ namespace Container_algoritme
         private List<ContainerStack> containerStacks;
         private List<ContainerColumn> containerColumns;
         private Stacker stacker;
+        private ColumnCreator columnCreator;
 
         public ShipYard()
         {
             containerStacks = new List<ContainerStack>();
             stacker = new Stacker();
+            columnCreator = new ColumnCreator(5);
             
         }
 
@@ -24,9 +26,9 @@ namespace Container_algoritme
             containerStacks = stacker.StackContainers(toBeStacked);
         }
 
-        public void CreateColumns(List<Container> toBeStacked)
+        public void CreateColumns()
         {
-           // containerColumns;
+            containerColumns = columnCreator.CreateColumns(containerStacks);
         }
 
     }

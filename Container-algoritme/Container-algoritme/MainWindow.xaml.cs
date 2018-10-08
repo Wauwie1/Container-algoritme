@@ -94,6 +94,7 @@ namespace Container_algoritme
                     Ship ship = new Ship(rows, columns, shipMaxWeight);
                     ShipYard shipYard = new ShipYard();
                     shipYard.CreateStacks(containers);
+                    shipYard.CreateColumns();
                 }
               
             }

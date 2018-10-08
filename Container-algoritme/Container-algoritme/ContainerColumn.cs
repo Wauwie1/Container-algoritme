@@ -8,11 +8,13 @@ namespace Container_algoritme
 {
     class ContainerColumn
     {
-        private List<ContainerStack> containerStacks;
+        //TODO make private
+        public List<ContainerStack> containerStacks;
         public bool ContainsPrecious { get; set; }
 
         public ContainerColumn()
         {
+            containerStacks = new List<ContainerStack>();
             ContainsPrecious = false;
         }
         public void AddStack(ContainerStack containerStack)
