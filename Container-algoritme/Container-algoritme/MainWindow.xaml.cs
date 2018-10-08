@@ -77,8 +77,8 @@ namespace Container_algoritme
 
         private void CreateShip()
         {
-            try
-            {
+            //try
+            //{
                 decimal shipLength = Convert.ToInt32(Textbox_Ship_Length.Text);
                 decimal shipWidth = Convert.ToInt32(Textbox_Ship_Width.Text);
                 int shipMaxWeight = Convert.ToInt32(Textbox_Ship_MaxWeight.Text);
@@ -97,11 +97,11 @@ namespace Container_algoritme
                     shipYard.CreateColumns();
                 }
               
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Not all fields were filled out correctly.");
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Not all fields were filled out correctly.");
+            //}
         }
 
         private bool IsDifferenceCorrect(decimal shipLength, decimal shipWidth, decimal containerLength, decimal containerWidth)

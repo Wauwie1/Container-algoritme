@@ -14,14 +14,26 @@ namespace Container_algoritme
 
         public int totalWeight { get; set; }
 
-        public ContainerColumn()
+        private int maxRows { get; set; }
+
+        public ContainerColumn(int maxrows)
         {
             containerStacks = new List<ContainerStack>();
             ContainsPrecious = false;
             totalWeight = 0;
+            this.maxRows = maxrows;
         }
         public void AddStack(ContainerStack containerStack)
         {
+            if(containerStacks.Count - 1 >= maxRows)
+            {
+                throw new Exception("Max stacks reached");
+            }
+
+            if(containerStack.IsPrecious == true)
+            {
+                ContainsPrecious = true;
+            }
             containerStacks.Add(containerStack);
             totalWeight += containerStack.GetTotalWeight();
         }
