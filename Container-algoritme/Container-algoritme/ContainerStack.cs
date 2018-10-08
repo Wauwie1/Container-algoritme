@@ -17,6 +17,10 @@ namespace Container_algoritme
         public bool IsPrecious { get; private set; }
         public bool IsCooled { get; private set; }
 
+        public int GetTotalWeight()
+        {
+            return CalculateTotalWeight();
+        }
         //Constructor
         public ContainerStack(Container InitialContainer)
         {
@@ -79,12 +83,16 @@ namespace Container_algoritme
             }
         }
 
-        private void CalculateTotalWeight()
+        private int CalculateTotalWeight()
         {
+            int result = 0;
+
             foreach(Container c in stackedContainers)
             {
-                totalWeight += c.weight;
+                result += c.weight;
             }
+
+            return result;
         }
 
         private void SetStackTypes(Container container)

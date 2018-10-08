@@ -12,14 +12,18 @@ namespace Container_algoritme
         public List<ContainerStack> containerStacks;
         public bool ContainsPrecious { get; set; }
 
+        public int totalWeight { get; set; }
+
         public ContainerColumn()
         {
             containerStacks = new List<ContainerStack>();
             ContainsPrecious = false;
+            totalWeight = 0;
         }
         public void AddStack(ContainerStack containerStack)
         {
             containerStacks.Add(containerStack);
+            totalWeight += containerStack.GetTotalWeight();
         }
     }
 }

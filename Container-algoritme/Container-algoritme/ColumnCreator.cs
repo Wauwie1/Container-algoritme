@@ -38,7 +38,7 @@ namespace Container_algoritme
             foreach(var cc in containerColumns)
             {
                 int stack = 0;
-                Console.WriteLine(string.Format("COLUMN: {0}", column));
+                Console.WriteLine(string.Format("COLUMN: {0}. Weight: {1}", column, cc.totalWeight));
                 column++;
                 foreach(var cs in cc.containerStacks)
                 {
