@@ -44,7 +44,7 @@ namespace Container_algoritme
         {
             Random rand = new Random();
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 500; i++)
             {
                 int randomType = rand.Next(0, 3);
 
@@ -60,10 +60,10 @@ namespace Container_algoritme
                 }
                 else
                 {
-                    type = Types.ContainerType.precious;
+                    type = Types.ContainerType.regular;
                 }
 
-                Container container = new Container(rand.Next(4, 121), (Types.ContainerType)type);
+                Container container = new Container(rand.Next(4, 31), (Types.ContainerType)type);
                 containers.Add(container);
                 Listbox_containers.Items.Add(container);
             }
@@ -121,8 +121,8 @@ namespace Container_algoritme
                     decimal rows = Math.Ceiling(shipLength / containerLength);
                     decimal columns = Math.Ceiling(shipWidth / containerWidth);
 
-                    Ship ship = new Ship(rows, columns, shipMaxWeight);
-                    ShipYard shipYard = new ShipYard();
+                    Ship ship = new Ship((int)rows, (int)columns, shipMaxWeight);
+                    ShipYard shipYard = new ShipYard(ship);
                     shipYard.CreateStacks(containers);
                     shipYard.CreateColumns();
                 }

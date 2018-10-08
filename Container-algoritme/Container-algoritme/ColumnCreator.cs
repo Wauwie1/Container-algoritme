@@ -9,7 +9,7 @@ namespace Container_algoritme
     class ColumnCreator
     {
         private int maxRows;
-        private List<ContainerColumn> containerColumns;
+        public List<ContainerColumn> containerColumns { get; private set; }
         private List<ContainerStack> unplaceableStacks;
         private List<ContainerStack> toBePlacedStacks;
         public ColumnCreator(int maxRows)
@@ -46,6 +46,7 @@ namespace Container_algoritme
             }
         }
 
+        //TODO: Seperate in multiple methods
         private void CreatePreciousColumns()
         {
 

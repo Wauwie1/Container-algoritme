@@ -8,16 +8,21 @@ namespace Container_algoritme
 {
     class ShipYard
     {
+        private Ship ship;
+
         private List<ContainerStack> containerStacks;
         private List<ContainerColumn> containerColumns;
         private Stacker stacker;
         private ColumnCreator columnCreator;
+        
 
-        public ShipYard()
+        public ShipYard(Ship ship)
         {
+            this.ship = ship;
             containerStacks = new List<ContainerStack>();
             stacker = new Stacker();
-            columnCreator = new ColumnCreator(5);
+            columnCreator = new ColumnCreator(ship.Rows);
+
             
         }
 

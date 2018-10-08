@@ -10,8 +10,9 @@ namespace Container_algoritme
     {
         public int MaxWeight { get;  private set; }
         private ContainerStack[,] StackGrid;
-
-        public Ship(decimal rows, decimal columns, int maxWeight)
+        public int Rows { get; private set; }
+        public int Columns { get; private set; }
+        public Ship(int rows, int columns, int maxWeight)
         {
             StackGrid = new ContainerStack[(int)rows, (int)columns];
             this.MaxWeight = maxWeight;
