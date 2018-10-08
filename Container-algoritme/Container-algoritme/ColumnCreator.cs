@@ -25,7 +25,8 @@ namespace Container_algoritme
             this.toBePlacedStacks = toBePlacedStacks;
             CreateCooledColumns();
             CreatePreciousColumns();
-            TrimUnplacedPreciousStacks();
+            //TrimUnplacedPreciousStacks();
+            CreateRegularColumns();
 
             LogColumns();
             return containerColumns;
@@ -111,9 +112,33 @@ namespace Container_algoritme
             }
         } 
 
-        private void CreateRegularColumns(List<ContainerStack> containerStacks)
+        private void CreateRegularColumns()
         {
+            foreach(ContainerStack cs in toBePlacedStacks)
+            {
+                bool stackIsAdded = false;
+                //...and tries to place it in a stack...
+                for (int i = 0; i < containerColumns.Count && !stackIsAdded; i++)
+                {
+                    try
+                    {
+                        containerColumns[i].AddStack(cs);
+                        stackIsAdded = true;
+                    }catch
+                    {
+                        //If it can't be placed onto any stack, create a new stack
+                        if (i == containerColumns.Count - 1)
+                        {
+                            ContainerColumn newColumn = new ContainerColumn(maxRows);
+                            newColumn.AddStack(cs);
+                            containerColumns.Add(newColumn);
+                            stackIsAdded = true;
+                        }
+                    }
+                   
 
+                }
+            }
         }
 
         private void TrimUnplacedPreciousStacks()
