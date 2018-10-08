@@ -26,6 +26,7 @@ namespace Container_algoritme
             InitializeComponent();
             containers = new List<Container>();
             FillComboBox();
+            GenerateRandomContainers();
         }
 
         private void Button_Add_Click(object sender, RoutedEventArgs e)
@@ -38,6 +39,35 @@ namespace Container_algoritme
 
         }
 
+        //TODO: Delete method
+        private void GenerateRandomContainers()
+        {
+            Random rand = new Random();
+
+            for (int i = 0; i < 50; i++)
+            {
+                int randomType = rand.Next(0, 3);
+
+                Types.ContainerType type;
+
+                if (randomType == 0)
+                {
+                    type = Types.ContainerType.regular;
+                }
+                else if (randomType == 1)
+                {
+                    type = Types.ContainerType.cooled;
+                }
+                else
+                {
+                    type = Types.ContainerType.precious;
+                }
+
+                Container container = new Container(rand.Next(4, 121), (Types.ContainerType)type);
+                containers.Add(container);
+                Listbox_containers.Items.Add(container);
+            }
+        }
         private void AddContainer()
         {
             try
