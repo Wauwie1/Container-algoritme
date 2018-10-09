@@ -14,6 +14,7 @@ namespace Container_algoritme
         public int Columns { get; private set; }
         public Ship(int rows, int columns, int maxWeight)
         {
+            this.Rows = rows;
             StackGrid = new ContainerStack[(int)rows, (int)columns];
             this.MaxWeight = maxWeight;
         }
