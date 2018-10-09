@@ -60,7 +60,7 @@ namespace Container_algoritme
                 }
                 else
                 {
-                    type = Types.ContainerType.regular;
+                    type = Types.ContainerType.precious;
                 }
 
                 Container container = new Container(rand.Next(4, 31), (Types.ContainerType)type);
@@ -125,6 +125,7 @@ namespace Container_algoritme
                     ShipYard shipYard = new ShipYard(ship);
                     shipYard.CreateStacks(containers);
                     shipYard.CreateColumns();
+                ship.PlaceColumns(shipYard.containerColumns);
                 }
               
             //}
@@ -141,7 +142,7 @@ namespace Container_algoritme
                 return true;
             }else
             {
-                throw new Exception();
+                throw new Exception("Incorrect values given.");
             }
         }
 

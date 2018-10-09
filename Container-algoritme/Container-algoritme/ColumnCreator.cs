@@ -118,7 +118,7 @@ namespace Container_algoritme
             foreach(ContainerStack cs in toBePlacedStacks)
             {
                 bool stackIsAdded = false;
-                //...and tries to place it in a stack...
+                
                 for (int i = 0; i < containerColumns.Count && !stackIsAdded; i++)
                 {
                     try
@@ -127,7 +127,7 @@ namespace Container_algoritme
                         stackIsAdded = true;
                     }catch
                     {
-                        //If it can't be placed onto any stack, create a new stack
+                        //If it can't be placed in any column, create a new column
                         if (i == containerColumns.Count - 1)
                         {
                             ContainerColumn newColumn = new ContainerColumn(maxRows);

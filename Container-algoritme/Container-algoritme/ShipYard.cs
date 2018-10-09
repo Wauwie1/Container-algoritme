@@ -11,7 +11,7 @@ namespace Container_algoritme
         private Ship ship;
 
         private List<ContainerStack> containerStacks;
-        private List<ContainerColumn> containerColumns;
+        public List<ContainerColumn> containerColumns;
         private Stacker stacker;
         private ColumnCreator columnCreator;
         
@@ -21,7 +21,7 @@ namespace Container_algoritme
             this.ship = ship;
             containerStacks = new List<ContainerStack>();
             stacker = new Stacker();
-            columnCreator = new ColumnCreator(ship.Rows);
+            columnCreator = new ColumnCreator(ship.RowsAmount);
 
             
         }
