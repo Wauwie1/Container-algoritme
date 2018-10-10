@@ -21,6 +21,7 @@ namespace Container_algoritme
     public partial class MainWindow : Window
     {
         List<Container> containers;
+        private Ship ship { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -34,17 +35,12 @@ namespace Container_algoritme
             AddContainer();
         }
 
-        private void ComboBox_Type_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         //TODO: Delete method
         private void GenerateRandomContainers()
         {
             Random rand = new Random();
 
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 200; i++)
             {
                 int randomType = rand.Next(0, 3);
 
@@ -63,7 +59,7 @@ namespace Container_algoritme
                     type = Types.ContainerType.precious;
                 }
 
-                Container container = new Container(rand.Next(4, 31), (Types.ContainerType)type);
+                Container container = new Container(rand.Next(4, 31), type);
                 containers.Add(container);
                 Listbox_containers.Items.Add(container);
             }
@@ -75,6 +71,7 @@ namespace Container_algoritme
                 int weight = Convert.ToInt32(TextBox_weight.Text);
                 var type = ComboBox_Type.SelectedItem;
 
+                //Check wether they fields are filled in correctly
                 if(weight >= 4 && weight <= 120 && type != null)
                 {
                     Container container = new Container(weight, (Types.ContainerType)type);
@@ -83,7 +80,7 @@ namespace Container_algoritme
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new Exception("Incorrect weight or type selected.");
                 }
 
             }
@@ -95,9 +92,11 @@ namespace Container_algoritme
 
         private void FillComboBox()
         {
+            //Add types to combobox
             ComboBox_Type.Items.Add(Types.ContainerType.regular);
             ComboBox_Type.Items.Add(Types.ContainerType.cooled);
             ComboBox_Type.Items.Add(Types.ContainerType.precious);
+            
         }
 
         private void Button_CreateShip_Click(object sender, RoutedEventArgs e)
@@ -121,11 +120,12 @@ namespace Container_algoritme
                     decimal rows = Math.Ceiling(shipLength / containerLength);
                     decimal columns = Math.Ceiling(shipWidth / containerWidth);
 
-                    Ship ship = new Ship((int)rows, (int)columns, shipMaxWeight);
+                    ship = new Ship((int)rows, (int)columns, shipMaxWeight);
                     ShipYard shipYard = new ShipYard(ship);
                     shipYard.CreateStacks(containers);
                     shipYard.CreateColumns();
-                ship.PlaceColumns(shipYard.containerColumns);
+                    ship.PlaceColumns(shipYard.containerColumns);
+                    VisualizeShip();
                 }
               
             //}
@@ -146,8 +146,44 @@ namespace Container_algoritme
             }
         }
 
+        private void VisualizeShip()
+        {
 
+            
+            for(int i = 0; i < ship.ColumnsAmount; i++)
+            {
+                ListBox listBox = new ListBox();
+                listBox.Tag = i;
 
+                int index = 0;
+                foreach(ContainerStack cs in ship.columnGrid[i].containerStacks)
+                {
+                    Button buttonStack = new Button();
+                    buttonStack.Tag = index;
+                    index++;
+
+                    buttonStack.Content = cs.ToString();
+                    buttonStack.Click += new RoutedEventHandler(buttonStack_Click);
+                    listBox.Items.Add(buttonStack);
+
+                }
+                Stackpanel_columns.Children.Add(listBox);
+            }
+        }
+
+        private void buttonStack_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            int stackIndex = (int)button.Tag;
+
+            var parent = button.Parent as ListBox;
+            int parentIndex = (int)parent.Tag;
+
+            ContainerStack selectedStack = ship.columnGrid[parentIndex].containerStacks[stackIndex];
+            string contentsSelectedStack = selectedStack.GetContentsAsString();
+            MessageBox.Show(contentsSelectedStack);
+            
+        }
     }
 
 }

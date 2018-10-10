@@ -10,7 +10,7 @@ namespace Container_algoritme
     {
         public int MaxWeight { get;  private set; }
         private int currentWeight { get; set; }
-        private ContainerColumn[] columnGrid { get; set; }
+        public ContainerColumn[] columnGrid { get; private set; }
         public int RowsAmount { get; private set; }
         public int ColumnsAmount { get; private set; }
         private List<ContainerColumn> toBePlacedColumns { get; set; }
@@ -21,6 +21,7 @@ namespace Container_algoritme
             //Init
             currentWeight = 0;
             this.RowsAmount = rows;
+            this.ColumnsAmount = columns;
             columnGrid = new ContainerColumn[columns];
             this.MaxWeight = maxWeight;
         }

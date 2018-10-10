@@ -106,6 +106,22 @@ namespace Container_algoritme
                 IsPrecious = true;
             }
         }
-        
+
+        public string GetContentsAsString()
+        {
+            string contents = "Contents: " + "\n";
+
+            for(int i = 0; i < stackedContainers.Count; i++)
+            {
+                contents += stackedContainers[i].ToString() + "\n";
+            }
+
+            return contents;
+        }
+        public override string ToString()
+        {
+            return "Stack";
+        }
+
     }
 }
