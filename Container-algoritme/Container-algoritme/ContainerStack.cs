@@ -67,13 +67,7 @@ namespace Container_algoritme
         {
             int lastContainer = stackedContainers.Count - 1;
 
-            if(stackedContainers[lastContainer].type == Types.ContainerType.precious)
-            {
-                return true;
-            }else
-            {
-                return false;
-            }
+            return stackedContainers[lastContainer].type == Types.ContainerType.precious;
         }
 
         private int CalculateTotalWeight()
@@ -90,13 +84,14 @@ namespace Container_algoritme
 
         private void SetStackTypes(Container container)
         {
-            if (container.type == Types.ContainerType.cooled)
+            switch (container.type)
             {
-                IsCooled = true;
-            }
-            if (container.type == Types.ContainerType.precious)
-            {
-                IsPrecious = true;
+                case Types.ContainerType.cooled:
+                    IsCooled = true;
+                    break;
+                case Types.ContainerType.precious:
+                    IsPrecious = true;
+                    break;
             }
         }
 
