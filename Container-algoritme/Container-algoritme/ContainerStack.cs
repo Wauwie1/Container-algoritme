@@ -60,14 +60,7 @@ namespace Container_algoritme
             int bottomAndNewWeight = stackedWeightBottom + container.weight;
 
 
-            if (bottomAndNewWeight > 120)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return bottomAndNewWeight > 120;
         }
 
         public bool IsTopPrecious()
@@ -111,9 +104,9 @@ namespace Container_algoritme
         {
             string contents = "Contents: " + "\n";
 
-            for(int i = 0; i < stackedContainers.Count; i++)
+            foreach (var container in stackedContainers)
             {
-                contents += stackedContainers[i].ToString() + "\n";
+                contents += container + "\n";
             }
 
             return contents;

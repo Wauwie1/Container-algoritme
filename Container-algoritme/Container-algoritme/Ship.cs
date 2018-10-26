@@ -46,9 +46,9 @@ namespace Container_algoritme
                 PlaceColumnInGrid(toBePlacedColumns[0], 0);
                 PlaceColumnInGrid(toBePlacedColumns[1], lastEntry);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Precious column(s) cant be placed.");
+                Console.WriteLine("Precious column(s) cant be placed: " + ex.Message);
             }
         }
 
