@@ -1,39 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Container_algoritme
 {
     class ShipYard
     {
-        private Ship ship;
+        private Ship _ship;
 
-        private List<ContainerStack> containerStacks;
-        public List<ContainerColumn> containerColumns;
-        private Stacker stacker;
-        private ColumnCreator columnCreator;
+        private List<ContainerStack> _containerStacks;
+        public List<ContainerColumn> ContainerColumns;
+        private readonly Stacker _stacker;
+        private readonly ColumnCreator _columnCreator;
         
 
         public ShipYard(Ship ship)
         {
-            this.ship = ship;
-            containerStacks = new List<ContainerStack>();
-            stacker = new Stacker();
-            columnCreator = new ColumnCreator(ship.RowsAmount);
+            this._ship = ship;
+            _containerStacks = new List<ContainerStack>();
+            _stacker = new Stacker();
+            _columnCreator = new ColumnCreator(ship.RowsAmount);
 
             
         }
 
         public void CreateStacks(List<Container> toBeStacked)
         {
-            containerStacks = stacker.StackContainers(toBeStacked);
+            _containerStacks = _stacker.StackContainers(toBeStacked);
         }
 
         public void CreateColumns()
         {
-            containerColumns = columnCreator.CreateColumns(containerStacks);
+            ContainerColumns = _columnCreator.CreateColumns(_containerStacks);
         }
 
     }

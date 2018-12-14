@@ -11,17 +11,17 @@ namespace Container_algoritme.Tests
     [TestClass()]
     public class ContainerStackTests
     {
-        private List<Container> stackedContainers { get; set; }
-        private int stackedWeightBottom { get; set; }
-        private int totalWeight { get; set; }
+        private List<Container> StackedContainers { get; set; }
+        private int StackedWeightBottom { get; set; }
+        private int TotalWeight { get; set; }
 
         [TestMethod()]
         public void StackContainerTest()
         {
-            stackedContainers = new List<Container>();
-            stackedWeightBottom = 0;
-            totalWeight = 0;
-            Container container = new Container(120, Types.ContainerType.regular);
+            StackedContainers = new List<Container>();
+            StackedWeightBottom = 0;
+            TotalWeight = 0;
+            Container container = new Container(120, Types.ContainerType.Regular);
             bool test = StackContainer(container);
 
             Assert.AreEqual(true, test);
@@ -31,7 +31,7 @@ namespace Container_algoritme.Tests
         {
             if (!IsTooHeavy(container))
             {
-                stackedContainers.Add(container);
+                StackedContainers.Add(container);
                 return true;
             }
             else
@@ -42,7 +42,7 @@ namespace Container_algoritme.Tests
 
         private bool IsTooHeavy(Container container)
         {
-            if (stackedWeightBottom + container.weight > 120)
+            if (StackedWeightBottom + container.Weight > 120)
             {
                 return true;
             }
@@ -55,21 +55,21 @@ namespace Container_algoritme.Tests
         [TestMethod()]
         public void IsTopPreciousTest1()
         {
-            stackedContainers = new List<Container>();
+            StackedContainers = new List<Container>();
             
             bool test = false;
 
-            Container cont1 = new Container(90, Types.ContainerType.regular);
-            Container cont2 = new Container(90, Types.ContainerType.regular);
-            Container cont3 = new Container(90, Types.ContainerType.precious);
+            Container cont1 = new Container(90, Types.ContainerType.Regular);
+            Container cont2 = new Container(90, Types.ContainerType.Regular);
+            Container cont3 = new Container(90, Types.ContainerType.Precious);
 
-            stackedContainers.Add(cont1);
-            stackedContainers.Add(cont2);
-            stackedContainers.Add(cont3);
-            int lastContainer = stackedContainers.Count - 1;
+            StackedContainers.Add(cont1);
+            StackedContainers.Add(cont2);
+            StackedContainers.Add(cont3);
+            int lastContainer = StackedContainers.Count - 1;
 
 
-            if (stackedContainers[lastContainer].type == Types.ContainerType.precious)
+            if (StackedContainers[lastContainer].Type == Types.ContainerType.Precious)
             {
                 test = true;
             }
@@ -83,21 +83,21 @@ namespace Container_algoritme.Tests
         [TestMethod()]
         public void IsTopPreciousTest2()
         {
-            stackedContainers = new List<Container>();
+            StackedContainers = new List<Container>();
 
             bool test = false;
 
-            Container cont1 = new Container(90, Types.ContainerType.regular);
-            Container cont2 = new Container(90, Types.ContainerType.regular);
-            Container cont3 = new Container(90, Types.ContainerType.cooled);
+            Container cont1 = new Container(90, Types.ContainerType.Regular);
+            Container cont2 = new Container(90, Types.ContainerType.Regular);
+            Container cont3 = new Container(90, Types.ContainerType.Cooled);
 
-            stackedContainers.Add(cont1);
-            stackedContainers.Add(cont2);
-            stackedContainers.Add(cont3);
-            int lastContainer = stackedContainers.Count - 1;
+            StackedContainers.Add(cont1);
+            StackedContainers.Add(cont2);
+            StackedContainers.Add(cont3);
+            int lastContainer = StackedContainers.Count - 1;
 
 
-            if (stackedContainers[lastContainer].type == Types.ContainerType.precious)
+            if (StackedContainers[lastContainer].Type == Types.ContainerType.Precious)
             {
                 test = true;
             }

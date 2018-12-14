@@ -1,90 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Container_algoritme
 {
     class ColumnCreator
     {
-        private int maxRows;
-        public List<ContainerColumn> containerColumns { get; private set; }
-        private List<ContainerStack> unplaceableStacks;
-        private List<ContainerStack> toBePlacedStacks;
+        private int _maxRows;
+        public List<ContainerColumn> ContainerColumns { get; private set; }
+        private readonly List<ContainerStack> _unplaceableStacks;
+        private List<ContainerStack> _toBePlacedStacks;
         public ColumnCreator(int maxRows)
         {
-            containerColumns = new List<ContainerColumn>();
-            unplaceableStacks = new List<ContainerStack>();
-            this.maxRows = maxRows;
+            ContainerColumns = new List<ContainerColumn>();
+            _unplaceableStacks = new List<ContainerStack>();
+            _maxRows = maxRows;
 
         }
 
         public List<ContainerColumn> CreateColumns(List<ContainerStack> toBePlacedStacks)
         {
-            this.toBePlacedStacks = toBePlacedStacks;
+            _toBePlacedStacks = toBePlacedStacks;
             CreateCooledColumns();
             CreatePreciousColumns();
             //TrimUnplacedPreciousStacks();
             CreateRegularColumns();
 
             LogColumns();
-            return containerColumns;
+            return ContainerColumns;
         }
 
         private void CreateCooledColumns()
         {
             //Creates new columns for each cooled stack
-            List<ContainerStack> cooledStacks   = toBePlacedStacks.FindAll(cs => cs.IsCooled == true).ToList();
+            List<ContainerStack> cooledStacks   = _toBePlacedStacks.FindAll(cs => cs.IsCooled).ToList();
 
             foreach (ContainerStack cs in cooledStacks)
             {
-                ContainerColumn cooledColumn = new ContainerColumn(maxRows);
+                ContainerColumn cooledColumn = new ContainerColumn(_maxRows);
                 cooledColumn.AddStack(cs);
-                toBePlacedStacks.Remove(cs);
-                containerColumns.Add(cooledColumn);
+                _toBePlacedStacks.Remove(cs);
+                ContainerColumns.Add(cooledColumn);
             }
         }
 
-        //TODO: Seperate in multiple methods
         private void CreatePreciousColumns()
         {
 
-            List<ContainerStack> preciousStacks = toBePlacedStacks.FindAll(cs => cs.IsPrecious == true).ToList();
+            List<ContainerStack> preciousStacks = _toBePlacedStacks.FindAll(cs => cs.IsPrecious).ToList();
             int preciousStacksAmount = preciousStacks.Count;
 
 
             //Creates at least two columns
-            while (containerColumns.Count < 2)
+            while (ContainerColumns.Count < 2)
             {
-                ContainerColumn cc = new ContainerColumn(maxRows);
-                containerColumns.Add(cc);
+                ContainerColumn cc = new ContainerColumn(_maxRows);
+                ContainerColumns.Add(cc);
             }
 
-            containerColumns = containerColumns.OrderByDescending(cc => cc.totalWeight).ToList();
-            ContainerColumn heaviest1 = containerColumns[0];
-            ContainerColumn heaviest2 = containerColumns[1];
+            ContainerColumns = ContainerColumns.OrderByDescending(cc => cc.TotalWeight).ToList();
+            ContainerColumn heaviest1 = ContainerColumns[0];
+            ContainerColumn heaviest2 = ContainerColumns[1];
 
             foreach (ContainerStack cs in preciousStacks)
             {
-                if (heaviest1.totalWeight > heaviest2.totalWeight)
+                if (heaviest1.TotalWeight > heaviest2.TotalWeight)
                 {
                     try
                     {
                         heaviest2.AddStack(cs);
-                        toBePlacedStacks.Remove(cs);
+                        _toBePlacedStacks.Remove(cs);
                     }
                     catch (Exception)
                     {
                         try
                         {
                             heaviest1.AddStack(cs);
-                            toBePlacedStacks.Remove(cs);
+                            _toBePlacedStacks.Remove(cs);
                         }
                         catch
                         {
-                            unplaceableStacks.Add(cs);
-                            toBePlacedStacks.Remove(cs);
+                            _unplaceableStacks.Add(cs);
+                            _toBePlacedStacks.Remove(cs);
                         }
                     }
                 }
@@ -93,19 +90,19 @@ namespace Container_algoritme
                     try
                     {
                         heaviest1.AddStack(cs);
-                        toBePlacedStacks.Remove(cs);
+                        _toBePlacedStacks.Remove(cs);
                     }
                     catch (Exception)
                     {
                         try
                         {
                             heaviest2.AddStack(cs);
-                            toBePlacedStacks.Remove(cs);
+                            _toBePlacedStacks.Remove(cs);
                         }
                         catch
                         {
-                            unplaceableStacks.Add(cs);
-                            toBePlacedStacks.Remove(cs);
+                            _unplaceableStacks.Add(cs);
+                            _toBePlacedStacks.Remove(cs);
                         }
                     }
                 }
@@ -115,24 +112,24 @@ namespace Container_algoritme
 
         private void CreateRegularColumns()
         {
-            foreach(ContainerStack cs in toBePlacedStacks)
+            foreach(ContainerStack cs in _toBePlacedStacks)
             {
                 bool stackIsAdded = false;
                 
-                for (int i = 0; i < containerColumns.Count && !stackIsAdded; i++)
+                for (int i = 0; i < ContainerColumns.Count && !stackIsAdded; i++)
                 {
                     try
                     {
-                        containerColumns[i].AddStack(cs);
+                        ContainerColumns[i].AddStack(cs);
                         stackIsAdded = true;
                     }catch
                     {
                         //If it can't be placed in any column, create a new column
-                        if (i == containerColumns.Count - 1)
+                        if (i == ContainerColumns.Count - 1)
                         {
-                            ContainerColumn newColumn = new ContainerColumn(maxRows);
+                            ContainerColumn newColumn = new ContainerColumn(_maxRows);
                             newColumn.AddStack(cs);
-                            containerColumns.Add(newColumn);
+                            ContainerColumns.Add(newColumn);
                             stackIsAdded = true;
                         }
                     }
@@ -144,17 +141,17 @@ namespace Container_algoritme
 
         private void TrimUnplacedPreciousStacks()
         {
-            List<ContainerStack> trimmedList = new List<ContainerStack>(unplaceableStacks);
+            List<ContainerStack> trimmedList = new List<ContainerStack>(_unplaceableStacks);
 
            //Removes last entry in stack, which is precious
            foreach(ContainerStack cs in trimmedList)
             {
-                unplaceableStacks.Remove(cs);
-                cs.stackedContainers.Remove(cs.stackedContainers[cs.stackedContainers.Count - 1]);
-                if (cs.stackedContainers.Count != 0)
+                _unplaceableStacks.Remove(cs);
+                cs.StackedContainers.Remove(cs.StackedContainers[cs.StackedContainers.Count - 1]);
+                if (cs.StackedContainers.Count != 0)
                 {
                     //Add trimmed list to unplaced stacks
-                    toBePlacedStacks.Add(cs);
+                    _toBePlacedStacks.Add(cs);
                 }
                 
             }
@@ -163,19 +160,19 @@ namespace Container_algoritme
         private void LogColumns()
         {
             int column = 0;
-            foreach (var cc in containerColumns)
+            foreach (var cc in ContainerColumns)
             {
                 int stack = 0;
                 Console.WriteLine("");
-                Console.WriteLine(string.Format("COLUMN: {0}. Weight: {1}", column, cc.totalWeight));
+                Console.WriteLine($"COLUMN: {column}. Weight: {cc.TotalWeight}");
                 column++;
-                foreach (var cs in cc.containerStacks)
+                foreach (var cs in cc.ContainerStacks)
                 {
-                    Console.WriteLine(string.Format("STACK: {0}", stack));
+                    Console.WriteLine($"STACK: {stack}");
                     stack++;
-                    foreach (var container in cs.stackedContainers)
+                    foreach (var container in cs.StackedContainers)
                     {
-                        Console.WriteLine(string.Format("--- {0}", container.ToString()));
+                        Console.WriteLine($"--- {container.ToString()}");
                     }
                 }
             }

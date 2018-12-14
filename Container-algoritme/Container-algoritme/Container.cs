@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Container_algoritme
 {
     public class Container
     {
-        public int weight { get; private set; }
-        public Types.ContainerType type { get; private set; }
+        public int Weight { get; private set; }
+        public Types.ContainerType Type { get; private set; }
 
 
 
@@ -17,14 +13,14 @@ namespace Container_algoritme
         public Container(int weight, Types.ContainerType type)
         {
             //Initializes fields
-            this.weight = weight;
-            this.type = type;
+            Weight = weight;
+            Type = type;
         }
 
         public override string ToString()
         {
 
-            return $"{Convert.ToString(type)} {weight} ton container.";
+            return $"{Convert.ToString(Type)} {Weight} ton container.";
         }
 
     }

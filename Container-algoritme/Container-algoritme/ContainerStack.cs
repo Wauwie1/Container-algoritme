@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Container_algoritme
 {
     public class ContainerStack
     {
 
-        //TODO: Make private
-        public List<Container> stackedContainers { get; set; }
-        private int stackedWeightBottom { get; set; }
-        private int totalWeight { get; set; }
+        public List<Container> StackedContainers { get; private set; }
+        private int StackedWeightBottom { get; set; }
+        private int TotalWeight { get; set; }
 
         public bool IsPrecious { get; private set; }
         public bool IsCooled { get; private set; }
@@ -22,17 +17,17 @@ namespace Container_algoritme
             return CalculateTotalWeight();
         }
         //Constructor
-        public ContainerStack(Container InitialContainer)
+        public ContainerStack(Container initialContainer)
         {
             //Initializes fields
-            stackedContainers = new List<Container>();
+            StackedContainers = new List<Container>();
             IsPrecious = false;
             IsCooled = false;
             //Add initialcontainer
-            stackedContainers.Add(InitialContainer);
-            SetStackTypes(InitialContainer);
-            stackedWeightBottom = 0;
-            totalWeight = 0;
+            StackedContainers.Add(initialContainer);
+            SetStackTypes(initialContainer);
+            StackedWeightBottom = 0;
+            TotalWeight = 0;
         }
 
         public bool StackContainer(Container container)
@@ -40,8 +35,8 @@ namespace Container_algoritme
             //Checks if a container can be stacked without exceeding the weight limit
             if (!IsTooHeavy(container) && !IsTopPrecious())
             {
-                stackedContainers.Add(container);
-                stackedWeightBottom += container.weight;
+                StackedContainers.Add(container);
+                StackedWeightBottom += container.Weight;
 
                 SetStackTypes(container);
 
@@ -50,14 +45,13 @@ namespace Container_algoritme
             else
             {
                 return false;
-                throw new Exception("Weightlimit exceeded or precious");
             }
         }
 
         private bool IsTooHeavy(Container container)
         {
             //Checks if the added weight exceeds the total weight of 120
-            int bottomAndNewWeight = stackedWeightBottom + container.weight;
+            int bottomAndNewWeight = StackedWeightBottom + container.Weight;
 
 
             return bottomAndNewWeight > 120;
@@ -65,18 +59,18 @@ namespace Container_algoritme
 
         public bool IsTopPrecious()
         {
-            int lastContainer = stackedContainers.Count - 1;
+            int lastContainer = StackedContainers.Count - 1;
 
-            return stackedContainers[lastContainer].type == Types.ContainerType.precious;
+            return StackedContainers[lastContainer].Type == Types.ContainerType.Precious;
         }
 
         private int CalculateTotalWeight()
         {
             int result = 0;
 
-            foreach(Container c in stackedContainers)
+            foreach(Container c in StackedContainers)
             {
-                result += c.weight;
+                result += c.Weight;
             }
 
             return result;
@@ -84,12 +78,12 @@ namespace Container_algoritme
 
         private void SetStackTypes(Container container)
         {
-            switch (container.type)
+            switch (container.Type)
             {
-                case Types.ContainerType.cooled:
+                case Types.ContainerType.Cooled:
                     IsCooled = true;
                     break;
-                case Types.ContainerType.precious:
+                case Types.ContainerType.Precious:
                     IsPrecious = true;
                     break;
             }
@@ -99,7 +93,7 @@ namespace Container_algoritme
         {
             string contents = "Contents: " + "\n";
 
-            foreach (var container in stackedContainers)
+            foreach (var container in StackedContainers)
             {
                 contents += container + "\n";
             }

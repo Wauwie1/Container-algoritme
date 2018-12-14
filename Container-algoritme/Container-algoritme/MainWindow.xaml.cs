@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Container_algoritme
 {
@@ -20,12 +10,12 @@ namespace Container_algoritme
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Container> containers;
-        private Ship ship { get; set; }
+        private readonly List<Container> _containers;
+        private Ship Ship { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            containers = new List<Container>();
+            _containers = new List<Container>();
             FillComboBox();
             GenerateRandomContainers();
         }
@@ -35,7 +25,6 @@ namespace Container_algoritme
             AddContainer();
         }
 
-        //TODO: Delete method
         private void GenerateRandomContainers()
         {
             Random rand = new Random();
@@ -48,19 +37,19 @@ namespace Container_algoritme
 
                 if (randomType == 0)
                 {
-                    type = Types.ContainerType.regular;
+                    type = Types.ContainerType.Regular;
                 }
                 else if (randomType == 1)
                 {
-                    type = Types.ContainerType.cooled;
+                    type = Types.ContainerType.Cooled;
                 }
                 else
                 {
-                    type = Types.ContainerType.precious;
+                    type = Types.ContainerType.Precious;
                 }
 
                 Container container = new Container(rand.Next(4, 31), type);
-                containers.Add(container);
+                _containers.Add(container);
                 Listbox_containers.Items.Add(container);
             }
         }
@@ -75,7 +64,7 @@ namespace Container_algoritme
                 if(weight >= 4 && weight <= 120 && type != null)
                 {
                     Container container = new Container(weight, (Types.ContainerType)type);
-                    containers.Add(container);
+                    _containers.Add(container);
                     Listbox_containers.Items.Add(container);
                 }
                 else
@@ -93,9 +82,9 @@ namespace Container_algoritme
         private void FillComboBox()
         {
             //Add types to combobox
-            ComboBox_Type.Items.Add(Types.ContainerType.regular);
-            ComboBox_Type.Items.Add(Types.ContainerType.cooled);
-            ComboBox_Type.Items.Add(Types.ContainerType.precious);
+            ComboBox_Type.Items.Add(Types.ContainerType.Regular);
+            ComboBox_Type.Items.Add(Types.ContainerType.Cooled);
+            ComboBox_Type.Items.Add(Types.ContainerType.Precious);
             
         }
 
@@ -106,8 +95,6 @@ namespace Container_algoritme
 
         private void CreateShip()
         {
-            //try
-            //{
                 decimal shipLength = Convert.ToInt32(Textbox_Ship_Length.Text);
                 decimal shipWidth = Convert.ToInt32(Textbox_Ship_Width.Text);
                 int shipMaxWeight = Convert.ToInt32(Textbox_Ship_MaxWeight.Text);
@@ -120,19 +107,14 @@ namespace Container_algoritme
                     decimal rows = Math.Ceiling(shipLength / containerLength);
                     decimal columns = Math.Ceiling(shipWidth / containerWidth);
 
-                    ship = new Ship((int)rows, (int)columns, shipMaxWeight);
-                    ShipYard shipYard = new ShipYard(ship);
-                    shipYard.CreateStacks(containers);
+                    Ship = new Ship((int)rows, (int)columns, shipMaxWeight);
+                    ShipYard shipYard = new ShipYard(Ship);
+                    shipYard.CreateStacks(_containers);
                     shipYard.CreateColumns();
-                    ship.PlaceColumns(shipYard.containerColumns);
+                    Ship.PlaceColumns(shipYard.ContainerColumns);
                     VisualizeShip();
                 }
               
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Not all fields were filled out correctly.");
-            //}
         }
 
         private bool IsDifferenceCorrect(decimal shipLength, decimal shipWidth, decimal containerLength, decimal containerWidth)
@@ -150,13 +132,13 @@ namespace Container_algoritme
         {
 
             
-            for(int i = 0; i < ship.ColumnsAmount; i++)
+            for(int i = 0; i < Ship.ColumnsAmount; i++)
             {
                 ListBox listBox = new ListBox();
                 listBox.Tag = i;
 
                 int index = 0;
-                foreach(ContainerStack cs in ship.columnGrid[i].containerStacks)
+                foreach(ContainerStack cs in Ship.ColumnGrid[i].ContainerStacks)
                 {
                     Button buttonStack = new Button();
                     buttonStack.Tag = index;
@@ -179,7 +161,7 @@ namespace Container_algoritme
             var parent = button.Parent as ListBox;
             int parentIndex = (int)parent.Tag;
 
-            ContainerStack selectedStack = ship.columnGrid[parentIndex].containerStacks[stackIndex];
+            ContainerStack selectedStack = Ship.ColumnGrid[parentIndex].ContainerStacks[stackIndex];
             string contentsSelectedStack = selectedStack.GetContentsAsString();
             MessageBox.Show(contentsSelectedStack);
             

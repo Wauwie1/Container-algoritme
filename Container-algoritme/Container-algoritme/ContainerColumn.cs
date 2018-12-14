@@ -1,33 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Container_algoritme
 {
     class ContainerColumn
     {
-        //TODO make private
-        public List<ContainerStack> containerStacks;
+        public List<ContainerStack> ContainerStacks { get; private set; }
         public bool ContainsPrecious { get; set; }
 
-        public int totalWeight { get; set; }
+        public int TotalWeight { get; set; }
 
-        private int maxRows { get; set; }
+        private int MaxRows { get; set; }
 
         public ContainerColumn(int maxrows)
         {
             //Init
-            containerStacks = new List<ContainerStack>();
+            ContainerStacks = new List<ContainerStack>();
             ContainsPrecious = false;
-            totalWeight = 0;
-            this.maxRows = maxrows;
+            TotalWeight = 0;
+            MaxRows = maxrows;
         }
         public void AddStack(ContainerStack containerStack)
         {
             //Checks max rows dont get exceeded
-            if(containerStacks.Count - 1 >= maxRows)
+            if(ContainerStacks.Count - 1 >= MaxRows)
             {
                 throw new Exception("Max stacks reached");
             }
@@ -39,8 +35,8 @@ namespace Container_algoritme
             }
 
             //Adds the stack to the column and adds its weight
-            containerStacks.Add(containerStack);
-            totalWeight += containerStack.GetTotalWeight();
+            ContainerStacks.Add(containerStack);
+            TotalWeight += containerStack.GetTotalWeight();
         }
     }
 }
